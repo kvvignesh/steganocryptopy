@@ -1,26 +1,53 @@
-# steganocryptopy
+# Steganocryptopy - The simplest Python Steganography with crypto out there!
 
 ## Usage
 
-Create a `virtualenv` and install the requirements:
+In the following paragraphs, I am going to describe how you can get and use Steganocryptopy for your own projects.
 
-```
-virtualenv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
+###  Getting it
 
-Then, encrypt and decrypt your data with:
-
-```
-python steganography.py encrypt --key=key.key --img=input.png --file=README.md
-python steganography.py decrypt --key=key.key --img=output.png --file=output.txt
+To download steganocryptopy, either fork this github repo or simply use Pypi via pip.
+```sh
+$ pip install steganocryptopy
 ```
 
-To generate a key use the below command:
+### Using it
 
+Steganocryptopy was programmed with ease-of-use in mind. First, import Steganography from Steganocryptopy
+
+```Python
+from steganocryptopy.steganography import Steganography
 ```
-python steganography.py generate-key
+
+And you are ready to go!
+
+### Example Code
+
+```Python
+# https://github.com/kvvignesh/steganocryptopy
+
+#Import the module
+from steganocryptopy.steganography import Steganography
+
+key = 'key.key'             # Key file name
+input_image = 'input.png'   # Image name
+input_file = 'LICENSE'      # File that needs to be encrypted
+output_image = 'output.png' # Output image name
+output_file = 'output.txt'  # Output file name
+
+# Generate key
+Steganography.generate_key(key)
+
+# Encrypt the data and store in the image
+encrypted_image = Steganography.encrypt(key, input_image, input_file)
+encrypted_image.save(output_image)
+
+# Decrypt the data from image
+decrypted_text = Steganography.decrypt(key, output_image)
+
+print(decrypted_text)
+
+Steganography.write_file(output_file, decrypted_text)
 ```
 
 ## Steganography
